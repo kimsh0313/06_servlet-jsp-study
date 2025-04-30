@@ -4,6 +4,6 @@
   <title>Title</title>
 </head>
 <body>
-<h1 style="color: red">발생~</h1>
+<h1 style="color: red">500발생~</h1>
 </body>
 </html>

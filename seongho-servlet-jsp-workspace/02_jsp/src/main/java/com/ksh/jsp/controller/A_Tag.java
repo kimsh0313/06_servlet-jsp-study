@@ -19,31 +19,34 @@ import java.util.List;
 public class A_Tag extends HttpServlet{
         @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            // 요청처리 (db에 쿼리실행) => 조회되었다는 가정하로 진행
             int no = Integer.parseInt(req.getParameter("no"));
-            BookDto bk = new BookDto(1, "JSP마스터","김ㅌㅌ");
+            BookDto bk = new BookDto(1, "JSP 마스터", "김땡땡"); // 넘어온 번호로 조회된 도서객체
 
             List<PersonDto> list = List.of(
-                    new PersonDto(11,"홍길동","ㄵ"),
-
-                    new PersonDto(13,"홍길슨","ㅇㅈ"),
-                    new PersonDto(15,"홍말동","ㄵ")
+                    new PersonDto(20, "길동이", "남자"),
+                    new PersonDto(23, "개순이", "여자"),
+                    new PersonDto(25, "개똥이", "남자")
             );
 
-            req.setAttribute("book",bk);
+            // request 객체는 이미 Servlet단에서 선언이 되어있음 => 바로 접근 가능
+            req.setAttribute("book", bk);
 
+            // session 객체는 Servlet단에서 선언되어있지 않음 => HttpSession객체 얻기
             HttpSession session = req.getSession();
-            session.setAttribute("list",list);
+            session.setAttribute("list", list);
 
             ServletContext application = req.getServletContext();
-            application.setAttribute("academy", "ssg");
+            application.setAttribute("academy", "SSG I&C");
 
+            // 응답페이지 제작 => jsp에게 위임 (RequestDispatcher)
             RequestDispatcher rd = req.getRequestDispatcher("/section01/tagElement.jsp");
-            rd.forward(req,resp);
-    }
+            rd.forward(req, resp);
+        }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+
     }
 
 }
